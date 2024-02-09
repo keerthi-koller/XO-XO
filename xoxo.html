@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #div{
+            margin: 40px 400px;
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(purple, grey, purple, grey, purple);
+            display: flex;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+        }
+        #div button{
+            margin: 5px;
+            width: 150px;
+            height: 150px;
+            font-size: 100px;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="div">
+        <button index="0" onclick="insertValue()"></button>
+        <button index="1" onclick="insertValue()"></button>
+        <button index="2" onclick="insertValue()"></button>
+        <button index="3" onclick="insertValue()"></button>
+        <button index="4" onclick="insertValue()"></button>
+        <button index="5" onclick="insertValue()"></button>
+        <button index="6" onclick="insertValue()"></button>
+        <button index="7" onclick="insertValue()"></button>
+        <button index="8" onclick="insertValue()"></button>
+    </div>
+
+    <script>
+        let clickCount = 1;
+        let points = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+        function insertValue()
+        {
+            if (event.target.innerText != "")
+            {
+                alert("Already assigned");
+                return;
+            }
+
+            if (clickCount%2 == 0)
+            {
+                event.target.innerText = "O";
+                assignPoints();
+                clickCount++;
+            }
+            else
+            {
+                event.target.innerText = "X";
+                assignPoints();
+                clickCount++;
+            }
+        }
+
+        function assignPoints()
+        {
+            let index = event.target.getAttribute("index");
+            points[index] = event.target.innerText;
+            validateWinner(); 
+        }
+
+        function validateWinner()
+        {
+            if ( points[0]==points[1] && points[1]==points[2] && points[0]!=0 )
+            {
+                alert( `Player ${points[0]} won the game` );
+            }
+            else if ( points[3]==points[4] && points[4]==points[5] && points[3]!=0 )
+            {
+                alert( `Player ${points[3]} won the game` );
+            }
+            else if ( points[6]==points[7] && points[7]==points[8] && points[6]!=0 )
+            {
+                alert( `Player ${points[6]} won the game` );
+            }
+            else if ( points[0]==points[3] && points[3]==points[6] && points[0]!=0 )
+            {
+                alert( `Player ${points[0]} won the game` );
+            }
+            else if ( points[1]==points[4] && points[4]==points[7] && points[1]!=0 )
+            {
+                alert( `Player ${points[1]} won the game` );
+            }
+            else if ( points[2]==points[5] && points[5]==points[8] && points[2]!=0 )
+            {
+                alert( `Player ${points[2]} won the game` );
+            }
+            else if ( points[0]==points[4] && points[4]==points[8] && points[8]!=0 )
+            {
+                alert( `Player ${points[0]} won the game` );
+            }
+            else if ( points[2]==points[4] && points[4]==points[6] && points[2]!=0 )
+            {
+                alert( `Player ${points[2]} won the game` );
+            }
+            else if (clickCount == 9)
+            {
+                alert( `Match drawn` );
+            }
+        }
+
+    </script>
+</body>
+</html>
